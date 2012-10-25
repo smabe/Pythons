@@ -3,8 +3,7 @@ import os
 import time
 import pycurl
 import cStringIO
-import untangle 
-from Tkinter import Tk
+import untangle
 
 
 """ get current time """
@@ -38,10 +37,8 @@ o = untangle.parse(response.getvalue())
 url = o.upload.links.original.cdata
 delete_page = o.upload.links.delete_page.cdata
 
-r = Tk()
-r.withdraw()
-r.clipboard_clear()
-r.clipboard_append(url)
-r.destroy()
-print 'url:        ', url
+outf = os.popen("pbcopy", "w")
+outf.write(url)
+outf.close()
+print 'url: ', url
 print 'delete page:', delete_page
